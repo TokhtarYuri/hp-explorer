@@ -1,0 +1,19 @@
+body.theme-light {
+  --bg-color: #f0e6d2;
+  --text-color: #2e1a47;
+  --btn-bg: #2e1a47;
+  --btn-color: #fff;
+  --accent-color: #2e1a47;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+body.theme-magic {
+  --bg-color: #2e1a47;
+  --text-color: #f0e6d2;
+  --btn-bg:  #f0e6d2;
+  --btn-color: #fff;
+  --accent-color: #f0e6d2;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}

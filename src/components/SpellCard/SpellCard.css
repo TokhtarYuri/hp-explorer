@@ -1,0 +1,19 @@
+.spell-card {
+  background: #3f2315;
+  color: #e0e0e0;
+  border-left: 4px solid #b69350;
+  border-radius: 8px;
+  padding: 16px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.spell-card:hover {
+  background: #2a2a2a;
+  transform: translateY(-2px);
+}
+
+.spell-card h3 {
+  color: #d4af37;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
