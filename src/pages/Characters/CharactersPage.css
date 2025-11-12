@@ -55,6 +55,6 @@
     display: flex;
   }
     .characters-grid {
-    max-height: none; /* или auto */
+    max-height: none; 
   }
 }

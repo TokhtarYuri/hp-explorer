@@ -32,15 +32,13 @@ const CharactersPage: React.FC = () => {
   useEffect(() => {
   const updatePerPage = () => {
     if (window.innerWidth <= 768) {
-      // Мобильная версия — всегда 12 карточек
       setPerPage(12);
       const totalPages = Math.ceil((characters?.length || 0) / 12);
       if (currentPage > totalPages) setCurrentPage(1);
       return;
     }
-
-    // Десктоп — динамический расчет
-    const containerWidth = window.innerWidth - 240; // учитываем sidebar
+    
+    const containerWidth = window.innerWidth - 240;
     const cardMinWidth = 220;
     const gap = 16;
     const columns = Math.floor(containerWidth / (cardMinWidth + gap));
