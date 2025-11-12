@@ -4,6 +4,7 @@ import CharacterCard from '../../components/CharacterCard/CharacterCard';
 import { fetchCharacters } from '../../api/hpApi';
 import { useFetch } from '../../hooks/useFetch';
 import './CharactersPage.css';
+import { useTranslation } from 'react-i18next';
 
 type Character = {
   id: string;
@@ -24,41 +25,41 @@ const CharactersPage: React.FC = () => {
   });
 
   const [perPage, setPerPage] = useState(16);
+  const { t } = useTranslation();
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, currentPage.toString());
   }, [currentPage]);
 
   useEffect(() => {
-  const updatePerPage = () => {
-    if (window.innerWidth <= 768) {
-      setPerPage(12);
-      const totalPages = Math.ceil((characters?.length || 0) / 12);
+    const updatePerPage = () => {
+      if (window.innerWidth <= 768) {
+        setPerPage(12);
+        const totalPages = Math.ceil((characters?.length || 0) / 12);
+        if (currentPage > totalPages) setCurrentPage(1);
+        return;
+      }
+
+      const containerWidth = window.innerWidth - 240;
+      const cardMinWidth = 220;
+      const gap = 16;
+      const columns = Math.floor(containerWidth / (cardMinWidth + gap));
+      const rows = 2;
+      const newPerPage = Math.max(columns * rows, 2);
+      setPerPage(newPerPage);
+
+      const totalPages = Math.ceil((characters?.length || 0) / newPerPage);
       if (currentPage > totalPages) setCurrentPage(1);
-      return;
-    }
-    
-    const containerWidth = window.innerWidth - 240;
-    const cardMinWidth = 220;
-    const gap = 16;
-    const columns = Math.floor(containerWidth / (cardMinWidth + gap));
-    const rows = 2;
-    const newPerPage = Math.max(columns * rows, 2);
-    setPerPage(newPerPage);
+    };
 
-    const totalPages = Math.ceil((characters?.length || 0) / newPerPage);
-    if (currentPage > totalPages) setCurrentPage(1);
-  };
+    updatePerPage();
+    window.addEventListener('resize', updatePerPage);
+    return () => window.removeEventListener('resize', updatePerPage);
+  }, [characters, currentPage]);
 
-  updatePerPage();
-  window.addEventListener('resize', updatePerPage);
-  return () => window.removeEventListener('resize', updatePerPage);
-}, [characters, currentPage]);
-
-
-  if (loading) return <p className="loader">Loading characters...</p>;
-  if (error) return <p className="error">{error}</p>;
-  if (!characters) return <p className="error">No characters found</p>;
+  if (loading) return <p className="loader">{t('loading_characters')}</p>;
+  if (error) return <p className="error">{t('error_loading')}</p>;
+  if (!characters) return <p className="error">{t('no_characters_found')}</p>;
 
   const totalPages = Math.ceil(characters.length / perPage);
   const startIndex = (currentPage - 1) * perPage;
@@ -66,7 +67,7 @@ const CharactersPage: React.FC = () => {
 
   return (
     <div className="characters-page">
-      <h2>Characters</h2>
+      <h2>{t('characters')}</h2>
       <div className="characters-grid">
         {currentItems.map(c => (
           <div
@@ -84,16 +85,16 @@ const CharactersPage: React.FC = () => {
           onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
           disabled={currentPage === 1}
         >
-          ← Prev
+          {t('prev')}
         </button>
         <span>
-          Page {currentPage} / {totalPages}
+          {t('page')} {currentPage} / {totalPages}
         </span>
         <button
           onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
           disabled={currentPage === totalPages}
         >
-          Next →
+          {t('next')}
         </button>
       </div>
     </div>

@@ -1,46 +1,103 @@
-# Getting Started with Create React App
+# 🧙‍♂️ Harry Potter Test Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An interactive demo React application with multilingual support (EN / UA), dynamic frontend pagination, and a beautiful light/magic theme system.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## ⚡ About the Project
 
-### `npm start`
+This test project was created to demonstrate:
+- modern **React** stack and component structure;
+- **dynamic frontend pagination** with local state management;
+- full **i18n** support (EN / UA);
+- **theme switching** between light and magic modes;
+- **user preferences** persistence in LocalStorage;
+- **responsive sidebar navigation** with smooth transitions.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+---
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 🛠️ Technologies
 
-### `npm test`
+- **React + TypeScript**
+- **i18next** — multilingual support
+- **Context API** — theme and language management
+- **CSS Modules / Tailwind CSS** — styling and theming
+- **LocalStorage** — saving theme, language, and pagination state
+- **Vercel** — hosting and CI/CD
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🚀 Getting Started
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+# 1. Clone the repository
+git clone https://github.com/TokhtarYuri/hp-explorer.git
+cd hp-explorer
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# 2. Install dependencies
+npm install
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# 3. Start the development server
+npm start
+```
 
-### `npm run eject`
+Once started, open [http://localhost:3000](http://localhost:3000) in your browser.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+---
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## ✨ Main Features
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- 🧙 Theme toggle — Light / Magic  
+- 🌍 Language switcher — English / Українська  
+- 📦 Persistent user settings (theme, language, pagination)  
+- 🧭 Sidebar with navigation and controls  
+- ⚡ Dynamic pagination for smooth data browsing  
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+---
 
-## Learn More
+## 📂 Project Structure
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+src/
+ ├── components/
+ │   ├── Sidebar/
+ │   ├── ThemeSwitcher/
+ │   ├── LanguageSwitcher/
+ │   └── ...
+ ├── i18n/
+ │   ├── en.json
+ │   └── ua.json
+ ├── context/
+ │   ├── ThemeContext.tsx
+ ├── App.tsx
+ ├── index.tsx
+ └── styles/
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
+
+## 🌐 Translations
+
+Translation files are located in the `src/i18n` folder:
+- `en.json` — English  
+- `ua.json` — Ukrainian  
+
+The selected language is saved in `localStorage` under the key `hp-language`.
+
+---
+
+## 📦 Build & Deploy
+
+```bash
+npm run build
+```
+
+The production-ready build will be in the `build/` folder.  
+You can deploy it to **Vercel**, **Netlify**, or any React-compatible hosting provider.
+
+---
+
+## 🧩 Author
+
+Developed as a demo project inspired by the Harry Potter universe ✨  
+Used for testing UI components, internationalization, theming, and frontend pagination.

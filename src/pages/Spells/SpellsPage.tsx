@@ -3,6 +3,7 @@ import SpellCard from '../../components/SpellCard/SpellCard';
 import { fetchSpells } from '../../api/hpApi';
 import { useFetch } from '../../hooks/useFetch';
 import './SpellsPage.css';
+import { useTranslation } from 'react-i18next';
 
 type Spell = {
   id: string;
@@ -14,6 +15,7 @@ const LOCAL_STORAGE_KEY = 'spells-current-page';
 
 const SpellsPage: React.FC = () => {
   const { data: spells, loading, error } = useFetch<Spell[]>(fetchSpells);
+  const { t } = useTranslation();
 
   const [currentPage, setCurrentPage] = useState<number>(() => {
     const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -26,9 +28,9 @@ const SpellsPage: React.FC = () => {
     localStorage.setItem(LOCAL_STORAGE_KEY, currentPage.toString());
   }, [currentPage]);
 
-  if (loading) return <p className="loader">Loading spells...</p>;
-  if (error) return <p className="error">{error}</p>;
-  if (!spells || spells.length === 0) return <p className="error">No spells found</p>;
+  if (loading) return <p className="loader">{t('loading_spells')}</p>;
+  if (error) return <p className="error">{t('error_loading')}</p>;
+  if (!spells || spells.length === 0) return <p className="error">{t('no_spells_found')}</p>;
 
   const totalPages = Math.ceil(spells.length / perPage);
   const startIndex = (currentPage - 1) * perPage;
@@ -36,7 +38,7 @@ const SpellsPage: React.FC = () => {
 
   return (
     <div className="spells-page">
-      <h2>Spells</h2>
+      <h2>{t('spells')}</h2>
       <div className="spells-grid">
         {currentItems.map(spell => (
           <SpellCard key={spell.id} spell={spell} />
@@ -48,16 +50,16 @@ const SpellsPage: React.FC = () => {
           onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
           disabled={currentPage === 1}
         >
-          ← Prev
+          {t('prev')}
         </button>
         <span>
-          Page {currentPage} / {totalPages}
+          {t('page')} {currentPage} / {totalPages}
         </span>
         <button
           onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
           disabled={currentPage === totalPages}
         >
-          Next →
+          {t('next')}
         </button>
       </div>
     </div>

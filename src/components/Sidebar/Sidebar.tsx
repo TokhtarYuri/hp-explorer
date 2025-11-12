@@ -1,10 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import './Sidebar.css';
+import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
+import { useTranslation } from 'react-i18next';
 
 const Sidebar: React.FC = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const [open, setOpen] = useState(false);
+  const { t } = useTranslation();
 
   const handleToggle = () => setOpen(!open);
 
@@ -21,16 +24,21 @@ const Sidebar: React.FC = () => {
             <div className="logo-text">Harry Potter Explorer</div>
             <img src="/logo.png" alt="Harry Potter logo" className="logo-img" />
           </a>
+
           <div className="nav-links">
             <nav>
-              <a href="/characters" onClick={clearPagination}>Characters</a>
-              <a href="/spells" onClick={clearPagination}>Spells</a>
+              <a href="/characters" onClick={clearPagination}>{t('characters')}</a>
+              <a href="/spells" onClick={clearPagination}>{t('spells')}</a>
             </nav>
           </div>
         </div>
-        <button className="theme-btn" onClick={toggleTheme}>
-          {theme === 'light' ? 'Magic Mode' : 'Light Mode'}
-        </button>
+
+        <div className="sidebar-actions">
+          <LanguageSwitcher theme={theme} />
+          <button className="theme-btn" onClick={toggleTheme}>
+            {theme === 'light' ? t('magic_mode') : t('light_mode')}
+          </button>
+        </div>
       </aside>
 
       <header className={`mobile-header ${theme}`}>
@@ -46,16 +54,17 @@ const Sidebar: React.FC = () => {
           <img src="/logo.png" alt="Harry Potter logo" className="logo-img" />
         </div>
 
-
         <nav>
-          <a href="/characters" onClick={() => { clearPagination(); setOpen(false); }}>Characters</a>
-          <a href="/spells" onClick={() => { clearPagination(); setOpen(false); }}>Spells</a>
+          <a href="/characters" onClick={() => { clearPagination(); setOpen(false); }}>{t('characters')}</a>
+          <a href="/spells" onClick={() => { clearPagination(); setOpen(false); }}>{t('spells')}</a>
         </nav>
 
-        <button className="theme-btn" onClick={toggleTheme}>
-          {theme === 'light' ? 'Magic Mode' : 'Light Mode'}
-        </button>
-
+        <div className="mobile-actions">
+          <LanguageSwitcher theme={theme} />
+          <button className="theme-btn" onClick={toggleTheme}>
+            {theme === 'light' ? t('magic_mode') : t('light_mode')}
+          </button>
+        </div>
         <button className="close-btn" onClick={handleToggle}>✕</button>
       </div>
     </>

@@ -1,0 +1,22 @@
+.language-switcher {
+  display: flex;
+  justify-content: center;
+}
+
+.language-switcher button {
+  height: 50px;
+  padding: 0 1.5rem;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.language-switcher button {
+  background-color: var(--btn-bg);
+  color: var(--bg-color);
+}
+
+
